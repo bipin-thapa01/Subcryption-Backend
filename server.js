@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const card = require("./card");
+const item = require('./item');
 
 const server = express();
 
@@ -8,6 +9,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use("/card", card);
+server.use("/item", item);
 
 server.get("/", (req, res) => {
   res.send("Backend is working");

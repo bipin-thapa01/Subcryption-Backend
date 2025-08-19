@@ -1,20 +1,8 @@
-const mysql = require("mysql2");
+const { createClient } = require('@supabase/supabase-js');
 
-const database = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'subcryption',
-  port: 3306,
-});
+const supabaseUrl = 'https://ttocbvxrbkschnfevopk.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0b2NidnhyYmtzY2huZmV2b3BrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1NzQwMzQsImV4cCI6MjA3MTE1MDAzNH0.-x4xWT9YXkKhkBQe9r0wRq29rDvzS54nwr1wy8lVF6I';
 
-database.connect((err)=>{
-  if(err){
-    console.error(err);
-  }
-  else{
-    console.log("Connected Successfully!");
-  }
-});
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-module.exports = database;
+module.exports = {supabase};

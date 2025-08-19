@@ -1,17 +1,25 @@
 const express = require("express");
-const database = require("./database.js");
+const {supabase} = require("./database");
 
 const card = express.Router();
 
 card.get("/",(req,res)=>{
-  database.query('select * from items',(err,result)=>{
-    if(err){
+  const fetchItems = async () =>{
+    try{
+      const {data,err} = await supabase.from('items').select('*');
+
+      if(err){
+        throw err;
+      }
+
+      res.json(data)
+    }
+    catch(err){
       console.error(err);
     }
-    else{
-      res.json(result);
-    }
-  });
+  }
+
+  fetchItems();
 });
 
 module.exports = card;
