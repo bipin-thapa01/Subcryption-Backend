@@ -9,7 +9,7 @@ item.post('/', async (req, res) => {
   try {
     const { data, error } = await supabase
       .from('items')
-      .select('name,company,imgurl,amount(type,price),item_description(description,country,time),requirement(requirement,requirement_desc)').eq('id',clientData.item_id);
+      .select('name,company,imgurl,amount(type,price),item_description(description,country,time),requirement(requirement,requirement_desc)').eq('id',clientData.item_id).order('id',{ascending: true});
 
     if (error) {
       throw error;
