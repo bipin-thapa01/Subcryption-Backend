@@ -7,13 +7,12 @@ const upload = multer();
 
 email.post('/', upload.single("image"), async (req, res) => {
   try {
-    const { requiredInfo, name, email, paymentMethod, purchaseType, pricePaid } = req.body;
+    const { requiredInfo, name, email, paymentMethod, purchaseType, pricePaid, remark } = req.body;
     const image = req.file;
 
     const str = Object.entries(JSON.parse(requiredInfo)).map(([key,value])=>{
       return `${key}: ${value}`
     }).join('\n');
-    console.log(str);
 
     const transport = nodemailer.createTransport({
       service: "gmail",
@@ -33,7 +32,8 @@ email.post('/', upload.single("image"), async (req, res) => {
     Email: ${email}
     Payment Method: ${paymentMethod}
     purchased: ${purchaseType}
-    paid: ${pricePaid}`,
+    paid: ${pricePaid}
+    remark: ${remark}`,
       attachments: image
         ? [
           {

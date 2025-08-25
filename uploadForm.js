@@ -5,13 +5,13 @@ const formUpload = express.Router();
 formUpload.post('/',async (req,res)=>{
   const formData = req.body;
   try{
-    const {data, err} = await supabase.from('form').insert([{buyer_name: formData.name, buyer_email: formData.email, payment_method: formData.method, money: formData.price, type: formData.type}]).select();
+    const {data, err} = await supabase.from('form').insert([{buyer_name: formData.name, buyer_email: formData.email, payment_method: formData.method, money: formData.price, type: formData.type, remark: formData.remark}]).select();
     if(err){
       throw err;
     }
 
     const form_id = data[0].id;
-    const excludeKeys = ["email", "name", "type", "price", "method", "image"];
+    const excludeKeys = ["email", "name", "type", "price", "method", "image","remark"];
     const filteredData = Object.fromEntries(
       Object.entries(formData).filter(([key]) => !excludeKeys.includes(key))
     );
