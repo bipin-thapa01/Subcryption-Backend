@@ -5,6 +5,7 @@ const item = require('./item');
 const payment = require('./payment');
 const formUpload = require('./uploadForm');
 const email = require('./email');
+const search = require('./search')
 
 const server = express();
 
@@ -16,6 +17,7 @@ server.use("/item", item);
 server.use('/payment',payment);
 server.use('/upload-form',formUpload);
 server.use('/send-email',email);
+server.use('/search',search);
 
 server.get("/", (req, res) => {
   res.send("Backend is working");
