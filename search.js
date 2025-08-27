@@ -6,7 +6,7 @@ const search = express.Router();
 let cards;
 const fetchData = async () =>{
   try{
-    const {data, err} = await supabase.from('items').select('*');
+    const {data, err} = await supabase.from('items').select('*').order('id',{ascending: true});
     if(err){
       throw err;
     }
